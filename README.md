@@ -1,2 +1,1 @@
-# Sword-s-magic-factory
-This a my magic factory about some android project
+Welcome to my magic factory
