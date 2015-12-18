@@ -28,7 +28,7 @@ public class Util {
                 y = i *particle_Length;
 
                 int color = bitmap.getPixel(x, y);
-                particles[i][j] = new Particle(color, x,y);
+                particles[i][j] = new FallingParticle(color, x,y);
 
             }
         }
