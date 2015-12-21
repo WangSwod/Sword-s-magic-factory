@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                    particles =  Util.createParticlesFromBitmap(bitmap);
+                    particles =  Util.createParticlesFromBitmap(bitmap,v.getHeight(),v.getWidth());
                     pv = new ParticleView(MainActivity.this,particles);
                     setContentView(pv);
                     beginAnimation();
@@ -50,16 +51,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void beginAnimation(){
-       ValueAnimator animator =  ValueAnimator.ofInt(0, 5).setDuration(animationDuration);
+       ValueAnimator animator =  ValueAnimator.ofInt(0, animationDuration-1).setDuration(animationDuration);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                int time = (int)animation.getCurrentPlayTime();
+                int time = (int)animation.getAnimatedValue();
 
-                if (time %10 == 0){
+                Log.i("TAG", "CURRENT TIME: "+ time);
 
-                    pv.invalidate();
+                if(time <= particles.length){
+
+                    for(int i = 0 ; i < particles[particles.length - 1 - time].length ;i++){
+                        particles[particles.length -1 - time][i].setStarted(true);
+                    }
+                    Log.i(TAG, "Time:" + time + "/ "+ "row: " + time);
                 }
+
+                pv.invalidate();
             }
         });
         animator.start();

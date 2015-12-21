@@ -8,6 +8,24 @@ public abstract  class Particle {
     float x, y;
     int color;
     int time = 0 ;
+    boolean started = false;
+    float alpha = 1.0f;
+
+    public float getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
+    }
 
     public Particle(int color, float x, float y) {
         this.color = color;
