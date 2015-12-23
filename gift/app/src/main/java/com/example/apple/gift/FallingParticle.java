@@ -5,20 +5,27 @@ package com.example.apple.gift;
  */
 public class FallingParticle extends Particle {
     static final int G = 10;
-
-    public FallingParticle(int color,float x, float y ){
+    int order ;
+    public FallingParticle(int color,float x, float y ,int order){
         super(color,x,y);
+        this.order = order;
     }
 
     @Override
     public void advance() {
-        if(isStarted()){
-            incrementTime();
-            int time = getTime();
+        incrementTime();
+        if(getTime() > order) {
             float old_Y = getY();
-            float new_Y = Util.particle_Length + old_Y;
-//        Log.i("FallingParticle", "time: "+ time );
+            float new_Y = Util.particle_Length /2 + old_Y;
             setY(new_Y);
+
+        float old_Alpha = getAlpha();
+
+        if(old_Alpha>=0f){
+
+            float new_Alpha = old_Alpha - 0.04f;
+            setAlpha(new_Alpha);
+            }
         }
     }
 

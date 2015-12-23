@@ -9,8 +9,9 @@ public class Util {
 
     static int particle_Length = 10;
     static Particle[][] particles;
+    static int DURATION = 4000;
 
-    public static Particle[][] createParticlesFromBitmap(Bitmap bitmap ,int height_View,int width_View){
+    public static Particle[][] createParticlesFromBitmap(Bitmap bitmap ,float height_View,float width_View){
         int height_Bitmap = bitmap.getHeight();
         int width_Bitmap = bitmap.getWidth();
         int x , y ;
@@ -32,7 +33,7 @@ public class Util {
                 y = i *particle_Length;
 
                 int color = bitmap.getPixel(x, y);
-                particles[i][j] = new FallingParticle(color, x+offset_X,y+offset_Y);
+                particles[i][j] = new FallingParticle(color, x+offset_X,y+offset_Y,(num_h -1-i));
 
             }
         }

@@ -7,7 +7,7 @@ public abstract  class Particle {
 
     float x, y;
     int color;
-    int time = 0 ;
+    int time ;
     boolean started = false;
     float alpha = 1.0f;
 
