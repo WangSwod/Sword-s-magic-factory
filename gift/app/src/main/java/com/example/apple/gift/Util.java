@@ -1,6 +1,7 @@
 package com.example.apple.gift;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 
 /**
  * Created by apple on 12/16/15.
@@ -9,7 +10,7 @@ public class Util {
 
     static int particle_Length = 10;
     static Particle[][] particles;
-    static int DURATION = 4000;
+    static int DURATION =1000;
 
     public static Particle[][] createParticlesFromBitmap(Bitmap bitmap ,float height_View,float width_View){
         int height_Bitmap = bitmap.getHeight();
@@ -22,6 +23,8 @@ public class Util {
         float offset_X = (width_View - width_Bitmap)/2;
         float offset_Y = (height_View - height_Bitmap)/2;
 
+        Rect bound = new Rect(0,0,width_Bitmap,height_Bitmap);
+
 
 
         particles = new Particle[num_h][num_w];
@@ -33,7 +36,8 @@ public class Util {
                 y = i *particle_Length;
 
                 int color = bitmap.getPixel(x, y);
-                particles[i][j] = new FallingParticle(color, x+offset_X,y+offset_Y,(num_h -1-i));
+                particles[i][j] = new FallingParticle(color, x+offset_X,y+offset_Y,(num_h -1-i),bound);
+
 
             }
         }

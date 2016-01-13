@@ -12,6 +12,7 @@
         android:src = "@drawable/rose_new"
         android:id="@+id/rose_view"
         android:scaleType="center"
+
         android:layout_alignParentBottom="true" />
     <!--<ImageView-->
         <!--android:layout_width="wrap_content"-->

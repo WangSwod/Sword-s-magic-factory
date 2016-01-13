@@ -1,6 +1,5 @@
 package com.example.apple.gift;
 
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -59,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void beginAnimation(){
         initView();
-//        ValueAnimator animator = ValueAnimator.ofInt(0,300).setDuration(animationDuration);
-        ObjectAnimator animator =  ObjectAnimator.ofFloat(rose, "translationY",rose.getTranslationY(), -(rose_H - bitmap_Rose_H)/2).setDuration(animationDuration);
+        ValueAnimator animator = ValueAnimator.ofInt(0,300).setDuration(animationDuration);
+//        ObjectAnimator animator =  ObjectAnimator.ofFloat(rose, "translationY",rose.getTranslationY(), -(rose_H - bitmap_Rose_H)/2).setDuration(animationDuration);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
