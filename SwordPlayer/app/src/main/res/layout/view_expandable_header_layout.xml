@@ -1,12 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
+    android:layout_height="wrap_content"
+    android:background="@drawable/listview_expandable_background">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/music_logo"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/music_logo"
+        android:layout_margin="5dp"/>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is header"
-        android:background="@color/colorHeader"/>
+        android:layout_toRightOf="@id/music_logo">
+         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/play_image"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/play_image"
+             android:layout_margin="5dp"
+                />
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is header"
+
+                android:maxLines="1"
+
+                android:layout_alignParentTop="true"
+                android:id="@+id/song_name"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is header"
+                android:id="@+id/singer_name"
+                android:layout_alignBottom="@id/play_image"
+                android:textSize="15sp"/>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

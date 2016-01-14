@@ -63,10 +63,6 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
         View contentView = View.inflate(context,contentID,null);
         View headerView = View.inflate(context,headerID,null);
 
-//        contentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                LayoutParams.MATCH_PARENT));
-//        headerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                LayoutParams.WRAP_CONTENT));
 
         contentLayout.addView(contentView);
         headerLayout.addView(headerView);

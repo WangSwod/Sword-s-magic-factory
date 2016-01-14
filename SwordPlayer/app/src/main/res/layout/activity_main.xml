@@ -11,15 +11,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.apple.swordplayer.MainActivity">
 
-    <expandablelayout.SwordExpandableLayout
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        sword:sword_headerLayout = "@layout/view_expandable_header_layout"
-        sword:sword_contentLayout = "@layout/view_expandable_content_layout"
 
+        android:id = "@+id/sword_listview">
 
-
-      />
+    </ListView>
 
 
 </RelativeLayout>
