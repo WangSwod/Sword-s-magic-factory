@@ -1,15 +1,15 @@
 package com.example.apple.swordplayer;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.apple.swordplayer.util.Mp3Info;
-import com.example.apple.swordplayer.util.Util;
+import com.util.Mp3Info;
+import com.util.Util;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,6 @@ public class MusicAdapter extends BaseAdapter {
 
     static final String TAG = "MUSICADAPTER";
 
-    String[] testStrings = {"Test1","Test2","Test3","Test4","Test5"};
 
     ViewHolder viewHolder;
     Context context;
@@ -31,6 +30,8 @@ public class MusicAdapter extends BaseAdapter {
     public MusicAdapter(Context context) {
         this.context = context;
         mp3Infos = Util.getMusicFromDevice(context);
+
+
 
     }
 
@@ -59,8 +60,7 @@ public class MusicAdapter extends BaseAdapter {
         Mp3Info mp3Info = mp3Infos.get(position);
         String name = mp3Info.getName();
         String singer = mp3Info.getSinger();
-//        String name = "name";
-//        String singer = "singer";
+
         if(convertView == null){
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
@@ -68,6 +68,8 @@ public class MusicAdapter extends BaseAdapter {
 
             viewHolder.singer_Name = (TextView)convertView.findViewById(R.id.singer_name);
             viewHolder.song_Name = (TextView)convertView.findViewById(R.id.song_name);
+            viewHolder.play_Image = (ImageView)convertView.findViewById(R.id.play_image);
+
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder)convertView.getTag();
@@ -76,6 +78,7 @@ public class MusicAdapter extends BaseAdapter {
 
         viewHolder.singer_Name.setText(singer);
         viewHolder.song_Name.setText(name);
+        viewHolder.play_Image.setTag(position);
 
 
 
@@ -84,5 +87,7 @@ public class MusicAdapter extends BaseAdapter {
 
     private class ViewHolder{
         TextView song_Name, singer_Name;
+        ImageView play_Image;
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.apple.swordplayer.util;
+package com.util;
 
 /**
  * Created by apple on 1/14/16.
@@ -8,7 +8,8 @@ public class Mp3Info {
     String singer;
     String album;
 
-    Long duration ;
+    int duration ;
+
 
 
     public String getAlbum() {
@@ -19,11 +20,11 @@ public class Mp3Info {
         this.album = album;
     }
 
-    public Long getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Long duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

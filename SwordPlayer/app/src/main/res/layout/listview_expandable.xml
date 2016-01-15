@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<expandablelayout.SwordExpandableLayout
+<com.expandablelayout.SwordExpandableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:sword = "http://schemas.android.com/apk/res-auto"
         android:id="@+id/expandable_layout"

@@ -1,4 +1,4 @@
-package expandablelayout;
+package com.expandablelayout;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -23,10 +24,23 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
     static final String TAG = "SWORDEXPANDABLELAYOUT";
 
     private  boolean isContentShown = false;
+    public  int list_Id;
 
+
+    public int getListId() {
+        return list_Id;
+    }
+
+    public void setListId(int id) {
+        this.list_Id = id;
+    }
+
+    ImageView play_image;
     FrameLayout headerLayout, contentLayout;
     int contentID,headerID;
     TypedArray typedArray;
+
+
     public SwordExpandableLayout(Context context) {
         super(context);
 
@@ -44,7 +58,6 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
 
     private void init(Context context,AttributeSet attrs) {
 
-        Log.i(TAG, "init start");
 
         View root = View.inflate(context, R.layout.view_expandable, this);
 
@@ -68,7 +81,11 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
         headerLayout.addView(headerView);
         contentLayout.setVisibility(GONE);
 
-        headerLayout.setOnClickListener(this);
+
+
+
+        play_image = (ImageView)findViewById(R.id.play_image);
+        play_image.setOnClickListener(this);
 
         typedArray.recycle();
 
@@ -83,8 +100,14 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
      */
     @Override
     public void onClick(View v) {
+
         switch (v.getId()){
-            case R.id.view_expandable_headerlayout:
+            case R.id.play_image:
+
+                int position = (int)v.getTag();
+
+                Log.i(TAG, "postion of image:" + position);
+
                 if(isContentShown){
 
                     startCollapseAnimation(contentLayout);
