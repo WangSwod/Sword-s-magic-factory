@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorContent">#FF334499</color>
-    <color name="colorHeaderStart">#FFcdcdcd</color>
-    <color name="colorHeaderEnd">#FFefefef</color>
+    <color name="colorHeaderStart">#FFCDCDCD</color>
+    <color name="colorHeaderEnd">#FFFFFFFF</color>
 </resources>

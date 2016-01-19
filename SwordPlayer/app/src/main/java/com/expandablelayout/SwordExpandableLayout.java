@@ -13,8 +13,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 
+import com.example.apple.swordplayer.BaseActivity;
 import com.example.apple.swordplayer.R;
+import com.playservice.PlayService;
 
 /**
  * Created by apple on 1/13/16.
@@ -35,10 +38,12 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
         this.list_Id = id;
     }
 
-    ImageView play_image;
+    ImageView play_Image;
     FrameLayout headerLayout, contentLayout;
     int contentID,headerID;
     TypedArray typedArray;
+
+    SeekBar seekBar;
 
 
     public SwordExpandableLayout(Context context) {
@@ -53,7 +58,7 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
 
     public SwordExpandableLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context,attrs);
+        init(context, attrs);
     }
 
     private void init(Context context,AttributeSet attrs) {
@@ -81,11 +86,11 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
         headerLayout.addView(headerView);
         contentLayout.setVisibility(GONE);
 
+        play_Image = (ImageView)findViewById(R.id.play_image);
+        play_Image.setOnClickListener(this);
+        seekBar = (SeekBar)findViewById(R.id.seekBar);
 
-
-
-        play_image = (ImageView)findViewById(R.id.play_image);
-        play_image.setOnClickListener(this);
+//        duration_time = (TextView)findViewById(R.id.duration_time);
 
         typedArray.recycle();
 
@@ -93,39 +98,20 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
     }
 
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
+    public  void setDuration(int duration){
+        seekBar.setMax(duration);
+    }
+    public  void updateSeekBar(int duration){
 
-        switch (v.getId()){
-            case R.id.play_image:
 
-                int position = (int)v.getTag();
+        seekBar.setProgress(duration);
 
-                Log.i(TAG, "postion of image:" + position);
-
-                if(isContentShown){
-
-                    startCollapseAnimation(contentLayout);
-                    isContentShown = false;
-                }else{
-                    startShowAnimation(contentLayout);
-
-                    isContentShown = true;
-                }
-                break;
-            default: break;
-        }
     }
 
-    private void startCollapseAnimation(View v) {
+    public void startCollapseAnimation() {
 
-        v.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        int height = v.getMeasuredHeight();
+        contentLayout.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        int height = contentLayout.getMeasuredHeight();
 
 
         ValueAnimator valueAnimator = ValueAnimator.ofInt(height,0);
@@ -147,16 +133,18 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
 
         valueAnimator.setDuration(500);
         valueAnimator.start();
+        isContentShown = false;
+        play_Image.setImageResource(R.mipmap.play_image);
 
     }
 
 
 
-    private void startShowAnimation(View v ){
-        v.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        int height = v.getMeasuredHeight();
+    public void startShowAnimation( ){
+        contentLayout.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        int height = contentLayout.getMeasuredHeight();
 
-        v.setVisibility(VISIBLE);
+        contentLayout.setVisibility(VISIBLE);
         ValueAnimator valueAnimator = ValueAnimator.ofInt(0, height);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -166,6 +154,8 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
         });
         valueAnimator.setDuration(500);
         valueAnimator.start();
+        isContentShown = true;
+        play_Image.setImageResource(R.mipmap.pause_image);
 
     }
 
@@ -176,5 +166,37 @@ public class SwordExpandableLayout extends RelativeLayout implements View.OnClic
         contentLayout.setVisibility(GONE);
     }
 
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.play_image:
+
+                int position = (int)v.getTag(R.string.tag_for_position);
+                Context context = (Context)v.getTag(R.string.tag_for_context);
+
+                PlayService playService = ((BaseActivity) context).getPlayService();
+
+                playService.connectToView(this);
+                if(isContentShown){
+
+                    startCollapseAnimation();
+                    playService.stop(position);
+
+                }else{
+                    playService.start(position);
+                    startShowAnimation();
+
+                }
+                break;
+
+            default: break;
+        }
+    }
 
 }

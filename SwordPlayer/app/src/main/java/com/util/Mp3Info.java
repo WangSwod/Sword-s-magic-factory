@@ -10,7 +10,15 @@ public class Mp3Info {
 
     int duration ;
 
+    String uri;
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
 
     public String getAlbum() {
         return album;

@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -40,19 +39,30 @@ public class Util {
             String name = cursor.getString(columnIndex);
             if(name.endsWith(".mp3")){
 
-                mp3Info.setName( cursor.getString(columnIndex));
+                mp3Info.setName(cursor.getString(columnIndex));
 
 
                 columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST);
-                mp3Info.setSinger( cursor.getString(columnIndex));
+                mp3Info.setSinger(cursor.getString(columnIndex));
 
                 columnIndex =  cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
                 mp3Info.setDuration(cursor.getInt(columnIndex));
 
                 columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
                 String uri = cursor.getString(columnIndex);
+                mp3Info.setUri(uri);
 
-                Log.i(TAG, uri );
+                columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM);
+                String album = cursor.getString(columnIndex);
+
+                columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+                String data = cursor.getString(columnIndex);
+
+
+
+
+//                Log.i(TAG, album);
+//                Log.i(TAG, data);
 
 
                 mp3Infos.add(mp3Info);
@@ -72,6 +82,13 @@ public class Util {
         cursor.close();
         return mp3Infos;
 
+
+    }
+    //未完成，暂时没有用处
+    public static String parseTime(int time){
+        StringBuffer sb = new StringBuffer();
+
+        return time + "";
 
     }
 

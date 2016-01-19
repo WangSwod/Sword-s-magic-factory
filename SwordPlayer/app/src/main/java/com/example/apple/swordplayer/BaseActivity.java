@@ -57,4 +57,8 @@ public class BaseActivity extends AppCompatActivity {
 
         }
     }
+
+    public PlayService getPlayService(){
+        return playService;
+    }
 }

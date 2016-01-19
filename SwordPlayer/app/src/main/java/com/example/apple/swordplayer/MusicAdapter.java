@@ -1,5 +1,6 @@
 package com.example.apple.swordplayer;
 
+import android.app.Service;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,19 +17,21 @@ import java.util.ArrayList;
 /**
  * Created by apple on 1/14/16.
  */
-public class MusicAdapter extends BaseAdapter {
+public class MusicAdapter extends BaseAdapter  {
 
     static final String TAG = "MUSICADAPTER";
 
 
     ViewHolder viewHolder;
     Context context;
+    Service playService;
 
     ArrayList<Mp3Info> mp3Infos = new ArrayList<Mp3Info>();
 
 
-    public MusicAdapter(Context context) {
+    public MusicAdapter(Context context, Service playService) {
         this.context = context;
+        this.playService = playService;
         mp3Infos = Util.getMusicFromDevice(context);
 
 
@@ -78,12 +81,14 @@ public class MusicAdapter extends BaseAdapter {
 
         viewHolder.singer_Name.setText(singer);
         viewHolder.song_Name.setText(name);
-        viewHolder.play_Image.setTag(position);
-
+        viewHolder.play_Image.setTag(R.string.tag_for_position,position);
+        viewHolder.play_Image.setTag(R.string.tag_for_context,context);
 
 
         return convertView;
     }
+
+
 
     private class ViewHolder{
         TextView song_Name, singer_Name;
